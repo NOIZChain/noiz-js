@@ -1,14 +1,14 @@
 <template>
     <App class="app-chat">
-        <div class="brand-header">
+        <div class="brand-header" :style="{ backgroundColor: primaryColor }">
             <div class="brand-description"></div>
-            <img class="brand-logo" src="/brand/mcdonalds.png" />
+            <img class="brand-logo" :src="logo" />
         </div>
         <StripCta>
             <span>Powered By</span>
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
-        <ChatArea background="/brand/background-chat.png" />
+        <ChatArea :background="chatBackground" />
         <ChatInput />
     </App>
 </template>
@@ -39,13 +39,16 @@ import ChatInput from './components/ChatInput.vue'
     },
 })
 export default class Chat extends Vue {
+    @Prop() chatBackground!: string
+    @Prop() logo!: string
+    @Prop() primaryColor!: string
 }
 </script>
 
 <style scoped lang="scss">
 .app-chat {
     .brand-header {
-        background-color: rgb(151, 30, 30);
+        background-color: #FFFFFF;
         display: flex;
         justify-content: flex-end;
 

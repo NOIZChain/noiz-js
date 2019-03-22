@@ -1,6 +1,8 @@
 <template>
     <div id="view-home">
-        <Chat />
+        <Chat logo="/brand/mcdonalds.png" 
+            chatBackground="/brand/background-chat.png"
+            primaryColor="rgb(151, 30, 30)" />
     </div>
 </template>
 
