@@ -3,15 +3,12 @@ import VueI18n from 'vue-i18n';
 import App from './App.vue';
 import router from './router';
 import './reset.scss'
-import { Strings } from './strings';
+import { createLocalization } from './locale'
 
 Vue.config.productionTip = false;
 Vue.use(VueI18n)
 
-const i18n = new VueI18n({
-  locale: 'en',
-  messages: Strings
-})
+const i18n = createLocalization()
 
 new Vue({
   router,

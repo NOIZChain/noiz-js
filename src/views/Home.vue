@@ -3,6 +3,14 @@
         <ChatApp logo="/brand/mcdonalds.png" 
             chatBackground="/brand/background-chat.png"
             primaryColor="rgb(151, 30, 30)" />
+        <div class="app-settings">
+            <button @click="$i18n.locale = 'en'">
+                English
+            </button>
+            <button @click="$i18n.locale = 'zhHans'">
+                中文（简体）
+            </button>
+        </div>
     </div>
 </template>
 
