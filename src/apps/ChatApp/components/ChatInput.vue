@@ -1,7 +1,7 @@
 <template>
     <form name="chat-form">
         <div class="component-chat-input-wrapper">
-            <input :value="message" class="chat-input" name="message" type="text" placeholder="Ask something..." />
+            <input :value="message" class="chat-input" name="message" type="text" :placeholder="$t('askSomething')" />
         </div>
     </form>
 </template>
@@ -15,7 +15,7 @@ import Background from '@/components/Background.vue'
     }
 })
 export default class ChatInput extends Vue {
-    message!: string
+    @Prop({ default: '' }) message!: string
 }
 </script>
 

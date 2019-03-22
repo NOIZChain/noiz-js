@@ -5,7 +5,7 @@
             <img class="brand-logo" :src="logo" />
         </div>
         <StripCta>
-            <span>Powered By</span>
+            <span>{{ $t('poweredBy') }}</span>
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
         <ChatArea :background="chatBackground" />
@@ -38,7 +38,7 @@ import ChatInput from './components/ChatInput.vue'
         ChatInput
     },
 })
-export default class Chat extends Vue {
+export default class ChatApp extends Vue {
     @Prop() chatBackground!: string
     @Prop() logo!: string
     @Prop() primaryColor!: string

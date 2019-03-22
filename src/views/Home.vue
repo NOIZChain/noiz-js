@@ -1,6 +1,6 @@
 <template>
     <div id="view-home">
-        <Chat logo="/brand/mcdonalds.png" 
+        <ChatApp logo="/brand/mcdonalds.png" 
             chatBackground="/brand/background-chat.png"
             primaryColor="rgb(151, 30, 30)" />
     </div>
@@ -12,11 +12,11 @@ import {
     Vue,
     Prop
 } from 'vue-property-decorator';
-import Chat from '@/apps/Chat/index.vue'
+import ChatApp from '@/apps/ChatApp/index.vue'
 
 @Component({
     components: {
-        Chat
+        ChatApp
     },
 })
 export default class Home extends Vue {
