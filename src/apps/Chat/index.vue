@@ -1,0 +1,59 @@
+<template>
+    <App class="app-chat">
+        <div class="brand-header">
+            <div class="brand-description"></div>
+            <img class="brand-logo" src="/brand/mcdonalds.png" />
+        </div>
+        <StripCta>
+            <span>Powered By</span>
+            <img :src="require('@/assets/logo-noiz.png')" />
+        </StripCta>
+        <ChatArea background="/brand/background-chat.png" />
+        <ChatInput />
+    </App>
+</template>
+
+<script lang="ts">
+import {
+    Component,
+    Vue,
+    Prop
+} from 'vue-property-decorator';
+import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import Button from '@/components/Button.vue'
+import App from '@/components/App.vue';
+import Background from '@/components/Background.vue'
+import StripCta from '@/components/StripCta.vue'
+import ChatArea from './components/ChatArea.vue'
+import ChatInput from './components/ChatInput.vue'
+
+@Component({
+    components: {
+        HelloWorld,
+        Button,
+        App,
+        Background,
+        StripCta,
+        ChatArea,
+        ChatInput
+    },
+})
+export default class Chat extends Vue {
+}
+</script>
+
+<style scoped lang="scss">
+.app-chat {
+    .brand-header {
+        background-color: rgb(151, 30, 30);
+        display: flex;
+        justify-content: flex-end;
+
+        .brand-logo {
+            width: 80px;
+            height: 80px;
+            padding: 0 15px;
+        }
+    }
+}
+</style>
