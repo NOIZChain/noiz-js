@@ -36,7 +36,7 @@ export default class ChatInput extends Vue {
         e.preventDefault()
         e.stopPropagation()
         
-        this.onSend && this.onSend(this.message)
+        this.onSend(this.message)
         this.clear()
     }
 
