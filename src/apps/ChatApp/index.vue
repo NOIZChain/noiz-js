@@ -1,15 +1,15 @@
 <template>
     <App class="app-chat">
-        <div class="brand-header" :style="{ backgroundColor: primaryColor }">
+        <div class="brand-header" :style="{ backgroundColor: theme.primaryColor }">
             <div class="brand-description"></div>
-            <img class="brand-logo" :src="logo" />
+            <img class="brand-logo" :src="theme.logo" />
         </div>
         <StripCta>
             <span>{{ $t('poweredBy') }}</span>
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
-        <ChatArea :background="chatBackground" />
-        <ChatInput />
+        <ChatArea :background="theme.backgroundImage" :theme="theme" />
+        <ChatInput :onSend="onSend" :theme="theme" />
     </App>
 </template>
 
@@ -26,6 +26,7 @@ import Background from '@/components/Background.vue'
 import StripCta from '@/components/StripCta.vue'
 import ChatArea from './components/ChatArea.vue'
 import ChatInput from './components/ChatInput.vue'
+import { ChatTheme } from './state/types'
 
 @Component({
     components: {
@@ -39,9 +40,11 @@ import ChatInput from './components/ChatInput.vue'
     },
 })
 export default class ChatApp extends Vue {
-    @Prop() chatBackground!: string
-    @Prop() logo!: string
-    @Prop() primaryColor!: string
+    @Prop() theme!: ChatTheme
+
+    onSend(message: string) {
+        console.log('sending message: ', message)
+    }
 }
 </script>
 

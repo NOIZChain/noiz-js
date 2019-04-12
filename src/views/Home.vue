@@ -1,8 +1,11 @@
 <template>
     <div id="view-home">
-        <ChatApp logo="/brand/mcdonalds.png" 
-            chatBackground="/brand/background-chat.png"
-            primaryColor="rgb(151, 30, 30)" />
+        <ChatApp :theme="{
+            logo: '/brand/mcdonalds.png',
+            backgroundImage: '/brand/background-chat.png',
+            primaryColor: 'rgb(151, 30, 30)',
+            secondaryColor: '#FEBF06'
+        }" />
         <div class="app-settings">
             <button @click="$i18n.locale = 'en'">
                 English
