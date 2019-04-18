@@ -1,0 +1,22 @@
+mutation($info: SessionDataInput!) {
+  initSession(info: $info) {
+    session {
+      sessionId
+      directionDomain
+      referrerDomain
+      clientLocation {
+        city
+        country
+        countryCode
+        lat
+        lon
+      }
+    }
+    firstMessage {
+      who
+      response {
+        stringValue
+      }
+    }
+  }
+}

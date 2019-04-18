@@ -19,6 +19,7 @@
     "member-access": false,
     "trailing-comma": false,
     "no-trailing-whitespace": false,
-    "no-console": false
+    "no-console": false,
+    "max-line-length": false
   }
 }
