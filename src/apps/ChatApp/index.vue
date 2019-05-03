@@ -8,7 +8,12 @@
             <span>{{ $t('poweredBy') }}</span>
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
-        <ChatArea :background="theme.backgroundImage" :theme="theme" />
+        <ChatArea :background="theme.backgroundImage" :theme="theme">
+            <ChatMessageBlock message="Hello World" who="bot"/>
+            <ChatMessageBlock message="What's up?" who="client"/>
+            <ChatMessageBlock message="What's your favorite color?" who="bot"/>
+            <ChatMessageBlock message="Green" who="bot"/>
+        </ChatArea>
         <ChatInput :onSend="onSend" :theme="theme" />
     </App>
 </template>
@@ -21,18 +26,17 @@ import {
 } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Button from '@/components/Button.vue'
-import App from '@/components/App.vue';
 import Background from '@/components/Background.vue'
 import StripCta from '@/components/StripCta.vue'
 import ChatArea from './components/ChatArea.vue'
 import ChatInput from './components/ChatInput.vue'
 import { ChatTheme } from './state/types'
+import { IChatMessage } from '../../generated/schema-types';
 
 @Component({
     components: {
         HelloWorld,
         Button,
-        App,
         Background,
         StripCta,
         ChatArea,
@@ -41,6 +45,7 @@ import { ChatTheme } from './state/types'
 })
 export default class ChatApp extends Vue {
     @Prop() theme!: ChatTheme
+    @Prop() conversation!: IChatMessage[]
 
     onSend(message: string) {
         console.log('sending message: ', message)

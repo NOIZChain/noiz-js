@@ -6,6 +6,8 @@ import './reset.scss'
 import { createLocalization } from './locale'
 import { Noiz } from './client';
 
+(window as any)['exports'] = {}
+
 Vue.config.productionTip = false;
 Vue.use(VueI18n)
 

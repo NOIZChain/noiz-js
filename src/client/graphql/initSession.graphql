@@ -1,20 +1,24 @@
-mutation($info: SessionDataInput!) {
-  initSession(info: $info) {
+mutation initSession($info:SessionInput!) {
+	initSession(info:$info) {
     session {
-      sessionId
-      directionDomain
+      id
       referrerDomain
+      directionDomain
       clientLocation {
         city
         country
-        countryCode
         lat
         lon
       }
     }
     firstMessage {
       who
-      response {
+      value {
+        kind
+        stringValue
+      }
+      answers {
+        kind
         stringValue
       }
     }

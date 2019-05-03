@@ -2,7 +2,7 @@ import { GraphQLService } from '@/utils/ts-graphql';
 import Axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios'
 import { GraphQLError } from 'graphql';
 import initSession from './graphql/initSession.graphql'
-import { Query, Mutation, SessionData, MutationInitSessionArgs } from '@/generated/graphql';
+import { IQuery, IMutation, ISession, IMutationinitSessionArgs, IinitSessionMutationVariables } from '@/generated/schema-types';
 
 export interface NoizOptions {
     host: string,
@@ -10,12 +10,13 @@ export interface NoizOptions {
     http?: AxiosRequestConfig
 }
 
-export const defaultOptions: NoizOptions = {
+export const defaultOptions: Required<NoizOptions> = {
     host: 'http://localhost:1337',
-    graphQLEndpoint: '/graphql'
+    graphQLEndpoint: '/graphql',
+    http: {}
 }
 
-export type NoizGraphql = GraphQLService<AxiosRequestConfig, ApiResult<Query>, ApiResult<Mutation>>
+export type NoizGraphql = GraphQLService<AxiosRequestConfig, ApiResult<IQuery>, ApiResult<IMutation>>
 
 export interface ApiResult<T> {
     request: AxiosRequestConfig,
@@ -30,10 +31,10 @@ export interface GraphQLResponse<T> {
 }
 
 export class Noiz {
-    options: NoizOptions
+    options: Required<NoizOptions>
     graphql: NoizGraphql
     http: AxiosInstance
-    session?: SessionData
+    session?: ISession
 
     constructor(options: NoizOptions) {
         this.options = {
@@ -58,12 +59,12 @@ export class Noiz {
     }
 
     initGraphQL(options: NoizOptions): NoizGraphql {
-        return new GraphQLService<AxiosRequestConfig, ApiResult<Query>, ApiResult<Mutation>>(async (query, variables, requestOptions) => {
+        return new GraphQLService<AxiosRequestConfig, ApiResult<IQuery>, ApiResult<IMutation>>(async (query, variables, requestOptions) => {
             const payload = {
                 variables,
                 query
             }
-            const response = await this.http.post<GraphQLResponse<Query | Mutation>>(options.graphQLEndpoint || '/graphql', payload, requestOptions)
+            const response = await this.http.post<GraphQLResponse<IQuery | IMutation>>(options.host + options.graphQLEndpoint, payload, requestOptions)
             
             const data = response && response.data && response.data.data || {}
             const errors = (response.data && response.data.errors) || []
@@ -73,12 +74,12 @@ export class Noiz {
                 response,
                 request: response.config,
                 errors
-            } as ApiResult<Query> | ApiResult<Mutation>
+            } as ApiResult<IQuery> | ApiResult<IMutation>
         })
     }
 
     async initSession() {
-        const response = await this.graphql.mutation<MutationInitSessionArgs>(initSession, {
+        const response = await this.graphql.mutation<IinitSessionMutationVariables>(initSession, {
             info: {
                 directionDomain: window.location.href,
                 referrerDomain: document.referrer,
