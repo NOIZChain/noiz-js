@@ -9,10 +9,6 @@
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
         <ChatArea :background="theme.backgroundImage" :theme="theme">
-            <ChatMessageBlock message="Hello World" who="bot"/>
-            <ChatMessageBlock message="What's up?" who="client"/>
-            <ChatMessageBlock message="What's your favorite color?" who="bot"/>
-            <ChatMessageBlock message="Green" who="bot"/>
         </ChatArea>
         <ChatInput :onSend="onSend" :theme="theme" />
     </App>
