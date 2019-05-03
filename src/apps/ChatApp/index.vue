@@ -20,6 +20,7 @@ import {
     Vue,
     Prop
 } from 'vue-property-decorator';
+import App from '@/components/App.vue';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Button from '@/components/Button.vue'
 import Background from '@/components/Background.vue'
@@ -36,7 +37,8 @@ import { IChatMessage } from '../../generated/schema-types';
         Background,
         StripCta,
         ChatArea,
-        ChatInput
+        ChatInput,
+        App
     },
 })
 export default class ChatApp extends Vue {
