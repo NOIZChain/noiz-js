@@ -9,6 +9,10 @@
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
         <ChatArea :background="theme.backgroundImage" :theme="theme">
+            <ChatMessageBlock message="Hello World" who="bot"/>
+            <ChatMessageBlock message="What's up?" who="client"/>
+            <ChatMessageBlock message="What's your favorite color?" who="bot"/>
+            <ChatMessageBlock message="Green" who="client"/>
         </ChatArea>
         <ChatInput :onSend="onSend" :theme="theme" />
     </App>
@@ -27,6 +31,7 @@ import Background from '@/components/Background.vue'
 import StripCta from '@/components/StripCta.vue'
 import ChatArea from './components/ChatArea.vue'
 import ChatInput from './components/ChatInput.vue'
+import ChatMessageBlock from './components/ChatMessageBlock.vue'
 import { ChatTheme } from './state/types'
 import { IChatMessage } from '../../generated/schema-types';
 
@@ -38,6 +43,7 @@ import { IChatMessage } from '../../generated/schema-types';
         StripCta,
         ChatArea,
         ChatInput,
+        ChatMessageBlock,
         App
     },
 })
