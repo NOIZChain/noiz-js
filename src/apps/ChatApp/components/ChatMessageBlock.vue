@@ -49,7 +49,8 @@ export default class ChatMessageBlock extends Vue {
         margin: 10px;
         padding: 10px;
         color: #fff;
-        
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
     }
 }
 </style>
