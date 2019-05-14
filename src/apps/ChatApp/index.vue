@@ -9,10 +9,7 @@
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
         <ChatArea :background="theme.backgroundImage" :theme="theme">
-            <ChatMessageBlock message="Hello World" who="bot"/>
-            <ChatMessageBlock message="What's up?" who="client"/>
-            <ChatMessageBlock message="What's your favorite color?" who="bot"/>
-            <ChatMessageBlock message="Green" who="client"/>
+            <ChatMessageBlock v-for="(message, index) in conversation" :key="index" :message="message.value.stringValue" :who="message.who"/>
         </ChatArea>
         <ChatInput :onSend="onSend" :theme="theme" />
     </App>
@@ -32,7 +29,7 @@ import StripCta from '@/components/StripCta.vue'
 import ChatArea from './components/ChatArea.vue'
 import ChatInput from './components/ChatInput.vue'
 import ChatMessageBlock from './components/ChatMessageBlock.vue'
-import { ChatTheme } from './state/types'
+import { ChatTheme, ChatMessageCallback } from './state/types'
 import { IChatMessage } from '../../generated/schema-types';
 import { NLPChat } from '../../client/nlp';
 
@@ -50,13 +47,38 @@ import { NLPChat } from '../../client/nlp';
 })
 export default class ChatApp extends Vue {
     @Prop() theme!: ChatTheme
-    @Prop() conversation!: IChatMessage[]
     @Prop() nlpChat!: NLPChat
+    @Prop() onMessage!: ChatMessageCallback
+    conversation: IChatMessage[] = []
 
     async onSend(message: string) {
+        const clientMessage: IChatMessage = {
+            answers: [],
+            who: 'client',
+            value: {
+                kind: 'stringValue',
+                stringValue: message
+            }
+        }
+        this.conversation.push(clientMessage)
+
+        if (typeof this.onMessage === 'function') {
+            this.onMessage(clientMessage)
+        }
+
         console.log('sending message: ', message)
-        const res = await this.nlpChat.sendMessage(message)
-        console.log('ressponse: ', res)
+        const data = await this.nlpChat.sendMessage(message)
+        console.log('ressponse: ', data)
+        console.log('data', data)
+
+        if (data) {
+            console.log('pushing message', data)
+            this.conversation.push(data)
+            if (typeof this.onMessage === 'function') {
+                this.onMessage(data)
+            }
+        }
+        
     }
 }
 </script>

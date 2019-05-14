@@ -1,11 +1,12 @@
 <template>
     <div id="view-home">
-        <ChatApp :nlpChat="$root.nlpChat" :theme="{
-            logo: '/brand/mcdonalds.png',
-            backgroundImage: '/brand/background-chat.png',
-            primaryColor: 'rgb(151, 30, 30)',
-            secondaryColor: '#FEBF06'
-        }" />
+        <ChatApp :nlpChat="$root.nlpChat" 
+            :theme="{
+                logo: '/brand/mcdonalds.png',
+                backgroundImage: '/brand/background-chat.png',
+                primaryColor: 'rgb(151, 30, 30)',
+                secondaryColor: '#FEBF06'
+            }" />
         <div class="app-settings">
             <button @click="$i18n.locale = 'en'">
                 English
@@ -24,6 +25,7 @@ import {
     Prop
 } from 'vue-property-decorator';
 import ChatApp from '@/apps/ChatApp/index.vue';
+import { IChatMessage } from '../generated/schema-types';
 
 @Component({
     components: {

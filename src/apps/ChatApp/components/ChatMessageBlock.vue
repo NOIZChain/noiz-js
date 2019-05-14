@@ -1,5 +1,5 @@
 <template>
-    <div class="component-chat-message-block" v-bind:class="{ bot: who === 'bot', client: who === 'client' }">
+    <div class="component-chat-message-block" v-bind:class="{ bot: who.toLowerCase() === 'bot', client: who.toLowerCase() === 'client' }">
         <div class="chat-bubble">
             {{ message }}
         </div>
@@ -33,6 +33,7 @@ export default class ChatMessageBlock extends Vue {
         .chat-bubble {
             background-color: rgb(220, 130, 50);
             border-radius: 0 10px 10px 10px;
+            text-align: left;
         }
     }
 
@@ -42,6 +43,7 @@ export default class ChatMessageBlock extends Vue {
         .chat-bubble {
             background-color: rgb(151, 30, 30);
             border-radius: 10px 10px 0 10px;
+            text-align: right;
         }
     }
     

@@ -9,7 +9,7 @@ export class NLPChat {
     }
 
     async sendMessage(text: string) {
-        return await this.noiz.graphql.mutation<IMutationsendMessageArgs>(sendMessage, {
+        const result = await this.noiz.graphql.mutation<IMutationsendMessageArgs>(sendMessage, {
             sessionId: this.noiz.session && this.noiz.session.id || '',
             message: {
                 who: ISenderType.CLIENT,
@@ -19,5 +19,7 @@ export class NLPChat {
                 }
             }
         })
+
+        return result.data.sendMessage
     }
 }
