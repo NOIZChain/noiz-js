@@ -1,0 +1,13 @@
+mutation sendMessage($sessionId: String!, $message: ChatMessageInput!) {
+  sendMessage(sessionId: $sessionId, message: $message) {
+    who
+    value {
+      kind
+      stringValue
+    }
+    answers {
+      kind
+      stringValue
+    }
+  }
+}

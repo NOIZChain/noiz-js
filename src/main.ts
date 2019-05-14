@@ -5,6 +5,7 @@ import router from './router';
 import './reset.scss'
 import { createLocalization } from './locale'
 import { Noiz } from './client';
+import { NLPChat } from './client/nlp';
 
 Vue.config.productionTip = false;
 Vue.use(VueI18n)
@@ -15,6 +16,10 @@ const noiz = new Noiz({
   graphQLEndpoint: '/graphql'
 })
 noiz.initSession()
+
+const chat = new NLPChat(noiz);
+
+(window as any).chat = chat
 
 new Vue({
   router,
