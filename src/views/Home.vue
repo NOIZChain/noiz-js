@@ -1,6 +1,6 @@
 <template>
     <div id="view-home">
-        <ChatApp :theme="{
+        <ChatApp :nlpChat="$root.nlpChat" :theme="{
             logo: '/brand/mcdonalds.png',
             backgroundImage: '/brand/background-chat.png',
             primaryColor: 'rgb(151, 30, 30)',
@@ -23,7 +23,7 @@ import {
     Vue,
     Prop
 } from 'vue-property-decorator';
-import ChatApp from '@/apps/ChatApp/index.vue'
+import ChatApp from '@/apps/ChatApp/index.vue';
 
 @Component({
     components: {

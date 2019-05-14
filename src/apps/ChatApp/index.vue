@@ -34,6 +34,7 @@ import ChatInput from './components/ChatInput.vue'
 import ChatMessageBlock from './components/ChatMessageBlock.vue'
 import { ChatTheme } from './state/types'
 import { IChatMessage } from '../../generated/schema-types';
+import { NLPChat } from '../../client/nlp';
 
 @Component({
     components: {
@@ -50,9 +51,12 @@ import { IChatMessage } from '../../generated/schema-types';
 export default class ChatApp extends Vue {
     @Prop() theme!: ChatTheme
     @Prop() conversation!: IChatMessage[]
+    @Prop() nlpChat!: NLPChat
 
-    onSend(message: string) {
+    async onSend(message: string) {
         console.log('sending message: ', message)
+        const res = await this.nlpChat.sendMessage(message)
+        console.log('ressponse: ', res)
     }
 }
 </script>
