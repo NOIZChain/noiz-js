@@ -32,8 +32,6 @@ export default class ChatMessageBlock extends Vue {
     selectedIdx: number = -1
 
     onClickAnswer(idx, value, e: Event) {
-        console.log(value)
-        console.log(e.target)
         this.selectedIdx = idx
         this.onSend(value)
     }
@@ -91,6 +89,7 @@ export default class ChatMessageBlock extends Vue {
         padding: 10px;
         text-align: center;
     }
+
     .selected {
         background-color: rgb(220, 130, 50);
     }
