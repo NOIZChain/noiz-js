@@ -1,3 +1,4 @@
+
 import { TypeScriptPluginConfig } from '@graphql-codegen/typescript';
 const cli = require('@graphql-codegen/cli');
 
@@ -10,7 +11,8 @@ module.exports.generateTypes = () => {
 
     const tsPluginConfig: TypeScriptPluginConfig = {
         namingConvention: 'keep',
-        typesPrefix: 'I'
+        typesPrefix: 'I',
+        maybeValue: 'T | undefined'
     }
 
     return cli.generate({

@@ -1,5 +1,5 @@
 <template>
-    <App class="app-chat">
+    <App class="app-chat" :width="size.width" :height="size.height">
         <div class="brand-header" :style="{ backgroundColor: theme.primaryColor }">
             <div class="brand-description"></div>
             <img class="brand-logo" :src="theme.logo" />
@@ -8,16 +8,7 @@
             <span>{{ $t('poweredBy') }}</span>
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
-        <ChatArea :background="theme.backgroundImage" :theme="theme">
-            <ChatMessageBlock
-                v-for="(message, index) in conversation"
-                :key="index"
-                :message="message.value.stringValue"
-                :who="message.who"
-                :answers="message.answers"
-                :onSend="onSend"
-            />
-        </ChatArea>
+        <ChatArea :background="theme.backgroundImage" :theme="theme" :messages="conversation" :onSend="onSend"/>
         <ChatInput :onSend="onSend" :theme="theme" />
     </App>
 </template>
@@ -28,17 +19,17 @@ import {
     Vue,
     Prop
 } from 'vue-property-decorator';
-import App from '@/components/App.vue';
+import { App, AppSize } from '@/components/App';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Button from '@/components/Button.vue'
 import Background from '@/components/Background.vue'
 import StripCta from '@/components/StripCta.vue'
 import ChatArea from './components/ChatArea.vue'
 import ChatInput from './components/ChatInput.vue'
-import ChatMessageBlock from './components/ChatMessageBlock.vue'
 import { ChatTheme, ChatMessageCallback } from './state/types'
 import { IChatMessage } from '../../generated/schema-types';
 import { NLPChat } from '../../client/nlp';
+import { executeSequence, delay } from '@/utils/flow'
 
 @Component({
     components: {
@@ -48,7 +39,6 @@ import { NLPChat } from '../../client/nlp';
         StripCta,
         ChatArea,
         ChatInput,
-        ChatMessageBlock,
         App
     },
 })
@@ -56,15 +46,22 @@ export default class ChatApp extends Vue {
     @Prop() theme!: ChatTheme
     @Prop() nlpChat!: NLPChat
     @Prop() onMessage!: ChatMessageCallback
+    @Prop({
+        default: () => ({
+            width: 400,
+            height: 530
+        })
+    }) size!: AppSize
+
     conversation: IChatMessage[] = []
 
-    async onSend(message: string) {
+    async onSend(messageText: string) {
         const clientMessage: IChatMessage = {
             answers: [],
             who: 'client',
             value: {
                 kind: 'stringValue',
-                stringValue: message
+                stringValue: messageText
             }
         }
         this.conversation.push(clientMessage)
@@ -73,16 +70,18 @@ export default class ChatApp extends Vue {
             this.onMessage(clientMessage)
         }
 
-        console.log('sending message: ', message)
-        const data = await this.nlpChat.sendMessage(message)
-        console.log('ressponse: ', data)
-        console.log('data', data)
+        const data = await this.nlpChat.sendMessage(messageText)
 
-        if (data) {
-            console.log('pushing message', data)
-            this.conversation.push(data)
+        if (Array.isArray(data)) {
+            executeSequence(data, async (message, i) => {
+                this.conversation.push(message)
+                await delay(1000)
+            })
+
             if (typeof this.onMessage === 'function') {
-                this.onMessage(data)
+                data.forEach(message => {
+                    this.onMessage(message)
+                })
             }
         }
         
