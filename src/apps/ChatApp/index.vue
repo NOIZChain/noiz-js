@@ -8,8 +8,8 @@
             <span>{{ $t('poweredBy') }}</span>
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
-        <ChatArea :background="theme.backgroundImage" :theme="theme" :messages="conversation" :onSend="onSend"/>
-        <ChatInput :onSend="onSend" :theme="theme" />
+        <ChatArea :background="theme.backgroundImage" :messages="conversation" :onSend="onSend"/>
+        <ChatInput :onSend="onSend" />
     </App>
 </template>
 
@@ -17,7 +17,8 @@
 import {
     Component,
     Vue,
-    Prop
+    Prop,
+    Inject
 } from 'vue-property-decorator';
 import { App, AppSize } from '@/components/App';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
@@ -43,7 +44,6 @@ import { executeSequence, delay } from '@/utils/flow'
     },
 })
 export default class ChatApp extends Vue {
-    @Prop() theme!: ChatTheme
     @Prop() nlpChat!: NLPChat
     @Prop() onMessage!: ChatMessageCallback
     @Prop({
@@ -52,6 +52,8 @@ export default class ChatApp extends Vue {
             height: 530
         })
     }) size!: AppSize
+
+    @Inject() readonly theme!: ChatTheme
 
     conversation: IChatMessage[] = []
 

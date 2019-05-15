@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import Background from '@/components/Background.vue'
+import Background from '@/components/Background.vue';
+import { Component, Prop, Vue, Inject } from 'vue-property-decorator';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { ChatTheme } from '../state/types';
 
 library.add(faArrowCircleUp)
@@ -27,8 +27,9 @@ library.add(faArrowCircleUp)
     },
 })
 export default class ChatInput extends Vue {
-    @Prop() theme!: ChatTheme
     @Prop() onSend!: (message: string) => any
+
+    @Inject() readonly theme!: ChatTheme
     
     message: string = ''
 
