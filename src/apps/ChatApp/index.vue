@@ -9,7 +9,7 @@
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
         <ChatArea :messages="conversation" :onSend="onSend"/>
-        <ChatInput :onSend="onSend" />
+        <ChatInput :onSend="onSend" :onFocus="startConversation" />
     </App>
 </template>
 
@@ -28,7 +28,7 @@ import StripCta from '@/components/StripCta.vue'
 import ChatArea from './components/ChatArea.vue'
 import ChatInput from './components/ChatInput.vue'
 import { ChatTheme, ChatMessageCallback } from './state/types'
-import { IChatMessage } from '../../generated/schema-types';
+import { IChatMessage, IChatMessageInput } from '../../generated/schema-types';
 import { NLPChat } from '../../client/nlp';
 import { executeSequence, delay } from '@/utils/flow'
 
@@ -46,6 +46,7 @@ import { executeSequence, delay } from '@/utils/flow'
 export default class ChatApp extends Vue {
     @Prop() nlpChat!: NLPChat
     @Prop() onMessage!: ChatMessageCallback
+    @Prop() firstMessage!: string
     @Prop({
         default: () => ({
             width: 400,
@@ -56,6 +57,32 @@ export default class ChatApp extends Vue {
     @Inject() readonly theme!: ChatTheme
 
     conversation: IChatMessage[] = []
+    conversationStarted: boolean = false
+
+    constructor() {
+        super()
+
+        this.init()
+    }
+
+    async init() {
+        const session = await this.nlpChat.noiz.initSession()
+        const conversation = session && session.messages
+
+        if (conversation) {
+            this.conversation = conversation
+        }
+    }
+
+    async startConversation() {
+        if (this.conversationStarted) return
+
+        const answer = await this.nlpChat.sendMessage(this.firstMessage)
+        if (answer) {
+            await this.loadResponses(answer)
+            this.conversationStarted = true
+        }
+    }
 
     async onSend(messageText: string) {
         const clientMessage: IChatMessage = {
@@ -66,7 +93,6 @@ export default class ChatApp extends Vue {
                 stringValue: messageText
             }
         }
-        this.conversation.push(clientMessage)
 
         if (typeof this.onMessage === 'function') {
             this.onMessage(clientMessage)
@@ -74,19 +100,22 @@ export default class ChatApp extends Vue {
 
         const data = await this.nlpChat.sendMessage(messageText)
 
-        if (Array.isArray(data)) {
-            executeSequence(data, async (message, i) => {
+        await this.loadResponses(data)
+    }
+
+    async loadResponses(responses: IChatMessage[]) {
+        if (Array.isArray(responses)) {
+            executeSequence(responses, async (message, i) => {
                 this.conversation.push(message)
                 await delay(1000)
             })
 
             if (typeof this.onMessage === 'function') {
-                data.forEach(message => {
+                responses.forEach(message => {
                     this.onMessage(message)
                 })
             }
         }
-        
     }
 }
 </script>

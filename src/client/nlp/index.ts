@@ -2,7 +2,7 @@ import { Noiz } from '..';
 import sendMessage from './graphql/sendMessage.graphql'
 import { IMutationsendMessageArgs, ISenderType } from '@/generated/schema-types'
 export class NLPChat {
-    private readonly noiz: Noiz
+    readonly noiz: Noiz
 
     constructor(noiz: Noiz) {
         this.noiz = noiz

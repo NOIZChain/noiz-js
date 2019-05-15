@@ -5,24 +5,24 @@ import App from './App.vue';
 import router from './router';
 import { createLocalization } from './locale';
 import { NLPChat } from './client/nlp';
-import noiz from './noiz';
+import { noiz, nlpChat } from './noiz';
+import { Noiz } from './client';
 
 Vue.config.productionTip = false;
 Vue.use(VueI18n)
 
 const i18n = createLocalization()
-const nlpChat = new NLPChat(noiz);
-
-(window as any).chat = nlpChat
 
 new Vue({
   router,
   render: (h) => h(App),
   i18n,
   props: {
-    nlpChat: NLPChat
+    nlpChat: NLPChat,
+    noiz: Noiz
   },
   propsData: {
-    nlpChat
+    nlpChat,
+    noiz
   }
 }).$mount('#app');
