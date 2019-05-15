@@ -19,6 +19,7 @@ export default class Background extends Vue {
     color: #b7bbc4;
     width: 100%;
     display: flex;
+    flex-shrink: 0;
     justify-content: flex-end;
     align-items: center;
     text-transform: uppercase;

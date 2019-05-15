@@ -12,8 +12,12 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
     }
 })
 export default class App extends Vue {
-    width: number = 400
-    height: number = 530
+    @Prop({
+        default: 400
+    }) width!: number
+    @Prop({
+        default: 530
+    }) height!: number
 }
 </script>
 
