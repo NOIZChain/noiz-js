@@ -1,7 +1,15 @@
 <template>
     <Background class="component-chat-area" :src="background" >
         <transition-group name="slide-up" tag="div" class="chat-content">
-            <ChatMessageBlock class="chat-block" v-for="(message, index) in reverseMessages" :key="reverseMessages.length - 1 - index" :data-index="reverseMessages.length - 1 - index" :message="message.value.stringValue" :who="message.who"/>
+            <ChatMessageBlock class="chat-block"
+                v-for="(message, index) in reverseMessages"
+                :key="reverseMessages.length - 1 - index"
+                :data-index="reverseMessages.length - 1 - index"
+                :message="message.value.stringValue"
+                :who="message.who"
+                :answers="message.answers"
+                :onSend="onSend"
+            />
         </transition-group>
     </Background>
 </template>
@@ -23,6 +31,7 @@ export default class ChatArea extends Vue {
         default: ''
     }) background!: string
     @Prop() messages!: IChatMessage[]
+    @Prop() onSend!: (message: string) => any
 
     get reverseMessages() {
         return this.messages.slice().reverse()
