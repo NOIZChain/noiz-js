@@ -1,8 +1,7 @@
+import { TypeScriptPluginConfig } from '@graphql-codegen/typescript';
 import { generate } from '@graphql-codegen/cli';
-import { TypeScriptPluginConfig } from '@graphql-codegen/typescript'
-import { TypeScriptDocumentsPluginConfig } from '@graphql-codegen/typescript-operations'
 
-export function generateTypes() {
+export const generateTypes = () => {
     const config = {
         from: 'http://localhost:1337/graphql',
         to: 'src/generated/schema-types.ts'
