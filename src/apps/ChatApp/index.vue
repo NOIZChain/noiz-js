@@ -9,7 +9,14 @@
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
         <ChatArea :background="theme.backgroundImage" :theme="theme">
-            <ChatMessageBlock v-for="(message, index) in conversation" :key="index" :message="message.value.stringValue" :who="message.who"/>
+            <ChatMessageBlock
+                v-for="(message, index) in conversation"
+                :key="index"
+                :message="message.value.stringValue"
+                :who="message.who"
+                :answers="message.answers"
+                :onSend="onSend"
+            />
         </ChatArea>
         <ChatInput :onSend="onSend" :theme="theme" />
     </App>
