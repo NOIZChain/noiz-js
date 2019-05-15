@@ -8,7 +8,7 @@
             <span>{{ $t('poweredBy') }}</span>
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
-        <ChatArea :background="theme.backgroundImage" :messages="conversation" :onSend="onSend"/>
+        <ChatArea :messages="conversation" :onSend="onSend"/>
         <ChatInput :onSend="onSend" />
     </App>
 </template>

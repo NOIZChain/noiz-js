@@ -1,5 +1,5 @@
 <template>
-    <Background class="component-chat-area" :src="background" >
+    <Background class="component-chat-area" :src="theme.backgroundImage" >
         <transition-group name="slide-up" tag="div" class="chat-content">
             <ChatMessageBlock class="chat-block"
                 v-for="(message, index) in reverseMessages"
@@ -15,10 +15,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import Background from '@/components/Background.vue'
+import Background from '@/components/Background.vue';
+import ChatMessageBlock from './ChatMessageBlock.vue';
+import { Component, Prop, Vue, Inject } from 'vue-property-decorator';
 import { IChatMessage } from '../../../generated/schema-types';
-import ChatMessageBlock from './ChatMessageBlock.vue'
+import { ChatTheme } from '../state/types';
 
 @Component({
     components: {
@@ -27,11 +28,10 @@ import ChatMessageBlock from './ChatMessageBlock.vue'
     }
 })
 export default class ChatArea extends Vue {
-    @Prop({
-        default: ''
-    }) background!: string
     @Prop() messages!: IChatMessage[]
     @Prop() onSend!: (message: string) => any
+
+    @Inject() readonly theme!: ChatTheme
 
     get reverseMessages() {
         return this.messages.slice().reverse()
