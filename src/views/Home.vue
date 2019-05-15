@@ -3,12 +3,7 @@
         <ChatApp :nlpChat="$root.nlpChat" 
             :firstMessage="$t('firstMessage')"
             :size="size"
-            :theme="{
-                logo: '/brand/mcdonalds.png',
-                backgroundImage: '/brand/background-chat.png',
-                primaryColor: 'rgb(151, 30, 30)',
-                secondaryColor: '#FEBF06'
-            }" />
+             />
         <div class="app-settings">
             <div class="size-settings">
                 <div class="size-width">
