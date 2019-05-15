@@ -26,5 +26,6 @@ export default class App extends Vue {
     display: flex;
     flex-flow: column;
     margin: 0 auto;
+    overflow: hidden;
 }
 </style>

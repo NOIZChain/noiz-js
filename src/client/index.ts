@@ -2,7 +2,7 @@ import { GraphQLService } from '@/utils/ts-graphql';
 import Axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios'
 import { GraphQLError } from 'graphql';
 import initSession from './graphql/initSession.graphql'
-import { IQuery, IMutation, ISession, IMutationinitSessionArgs, IinitSessionMutationVariables } from '@/generated/schema-types';
+import { IQuery, IMutation, ISession, IinitSessionMutationVariables } from '@/generated/schema-types';
 
 export interface NoizOptions {
     host: string,
@@ -87,7 +87,9 @@ export class Noiz {
         })
 
         if (response.data.initSession) {
-            this.session = response.data.initSession.session || undefined
+            this.session = response.data.initSession || undefined
         }
+
+        return this.session
     }
 }

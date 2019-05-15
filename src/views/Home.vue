@@ -1,6 +1,7 @@
 <template>
     <div id="view-home">
         <ChatApp :nlpChat="$root.nlpChat" 
+            :firstMessage="$t('firstMessage')"
             :size="size"
             :theme="{
                 logo: '/brand/mcdonalds.png',

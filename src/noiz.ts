@@ -1,10 +1,10 @@
 import { Noiz } from './client';
+import { NLPChat } from './client/nlp';
 
 
-const noiz = new Noiz({
+export const noiz = new Noiz({
   host: 'http://localhost:1337',
   graphQLEndpoint: '/graphql'
 })
-noiz.initSession()
 
-export default noiz;
+export const nlpChat = new NLPChat(noiz)

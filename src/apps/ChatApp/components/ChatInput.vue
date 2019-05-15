@@ -1,7 +1,7 @@
 <template>
     <form name="chat-form" @submit="onSubmit" novalidate>
         <div class="component-chat-input-wrapper">
-            <input v-model="message" class="chat-input" name="message" type="text" :placeholder="$t('askSomething')" />
+            <input v-model="message" class="chat-input" @focus="onInputFocus($event)" name="message" type="text" :placeholder="$t('askSomething')" />
             <button type="submit" class="submit-button" :style="{
                 color: theme.secondaryColor
             }">
@@ -28,7 +28,8 @@ library.add(faArrowCircleUp)
 })
 export default class ChatInput extends Vue {
     @Prop() theme!: ChatTheme
-    @Prop() onSend!: (message: string) => any
+    @Prop({ default: () => undefined }) onSend!: (message: string) => any
+    @Prop({ default: () => undefined }) onFocus!: () => any
     
     message: string = ''
 
@@ -38,6 +39,10 @@ export default class ChatInput extends Vue {
         
         this.onSend(this.message)
         this.clear()
+    }
+
+    onInputFocus() {
+        this.onFocus()
     }
 
     clear() {
