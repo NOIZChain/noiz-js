@@ -1,5 +1,5 @@
-import 'tsconfig-paths/register';
-import { generateTypes } from 'src/utils/generate-types';
+require('tsconfig-paths/register');
+const generateTypes = require('src/utils/generate-types').generateTypes;
 
 console.log('Generating types')
 generateTypes()
