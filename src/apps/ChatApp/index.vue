@@ -93,6 +93,7 @@ export default class ChatApp extends Vue {
                 stringValue: messageText
             }
         }
+        this.conversation.push(clientMessage)
 
         if (typeof this.onMessage === 'function') {
             this.onMessage(clientMessage)
