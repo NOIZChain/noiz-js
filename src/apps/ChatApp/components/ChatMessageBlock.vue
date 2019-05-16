@@ -43,10 +43,12 @@ export default class ChatMessageBlock extends Vue {
     display: flex;
     flex-flow: column;
     width: 100%;
+    flex-shrink: 0;
+    flex-grow: 0;
 
     .message-block {
         display: flex;
-
+        
         &.bot {
             justify-content: flex-start;
             

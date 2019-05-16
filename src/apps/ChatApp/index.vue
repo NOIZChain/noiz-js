@@ -85,6 +85,8 @@ export default class ChatApp extends Vue {
     }
 
     async onSend(messageText: string) {
+        if (!messageText || messageText.length === 0) return
+        
         const clientMessage: IChatMessage = {
             answers: [],
             who: 'client',
@@ -93,6 +95,8 @@ export default class ChatApp extends Vue {
                 stringValue: messageText
             }
         }
+        this.conversation.push(clientMessage)
+
         this.conversation.push(clientMessage)
 
         if (typeof this.onMessage === 'function') {
