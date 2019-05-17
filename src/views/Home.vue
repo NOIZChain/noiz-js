@@ -45,7 +45,7 @@ import { ChatTheme } from '../apps/ChatApp/state/types';
     },
 })
 export default class Home extends Vue {
-    private size: AppSize = {
+    size: AppSize = {
         width: 400,
         height: 530
     }
