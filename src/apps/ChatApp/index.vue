@@ -1,8 +1,11 @@
 <template>
     <App class="app-chat" :width="size.width" :height="size.height">
-        <div class="brand-header" :style="{ backgroundColor: theme.primaryColor }">
-            <div class="brand-description"></div>
-            <img class="brand-logo" :src="theme.logo" />
+        <div class="brand-header" 
+            :style="{ backgroundColor: theme.headerColor, height: theme.headerHeight }"
+            :class="{ [theme.headerJustification]: true }">
+            <div class="logo-block">
+                <img class="brand-logo" :src="theme.logo" :style="{ maxHeight: theme.headerHeight }" />
+            </div>
         </div>
         <StripCta>
             <span>{{ $t('poweredBy') }}</span>
@@ -18,7 +21,8 @@ import {
     Component,
     Vue,
     Prop,
-    Inject
+    Inject,
+    Provide
 } from 'vue-property-decorator';
 import { App, AppSize } from '@/components/App';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
@@ -31,6 +35,12 @@ import { ChatTheme, ChatMessageCallback } from './state/types'
 import { IChatMessage, IChatMessageInput } from '../../generated/schema-types';
 import { NLPChat } from '../../client/nlp';
 import { executeSequence, delay } from '@/utils/flow'
+import { createLocalization } from '../../locale';
+import VueI18n from 'vue-i18n';
+
+Vue.use(VueI18n)
+
+const i18n = createLocalization()
 
 @Component({
     components: {
@@ -53,8 +63,7 @@ export default class ChatApp extends Vue {
             height: 530
         })
     }) size!: AppSize
-
-    @Inject() readonly theme!: ChatTheme
+    @Provide() @Prop() theme!: ChatTheme
 
     conversation: IChatMessage[] = []
     conversationStarted: boolean = false
@@ -62,7 +71,7 @@ export default class ChatApp extends Vue {
     constructor() {
         super()
 
-        this.init()
+        this.init() 
     }
 
     async init() {
@@ -129,12 +138,31 @@ export default class ChatApp extends Vue {
     .brand-header {
         background-color: #FFFFFF;
         display: flex;
-        justify-content: flex-end;
+        flex-shrink: 0;
+        flex-grow: 0;
+        height: 80px;
+
+        &.left {
+            justify-content: flex-start;
+        }
+
+        &.right {
+            justify-content: flex-end;
+        }
+
+        &.center {
+            justify-content: center;
+        }
+
+        .logo-block {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+        }
 
         .brand-logo {
-            width: 80px;
-            height: 80px;
             padding: 0 15px;
+            max-height: 80px;
         }
     }
 }

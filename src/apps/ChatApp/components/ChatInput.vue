@@ -3,7 +3,7 @@
         <div class="component-chat-input-wrapper">
             <input v-model="message" class="chat-input" @focus="onInputFocus($event)" name="message" type="text" :placeholder="$t('askSomething')" />
             <button type="submit" class="submit-button" :style="{
-                color: theme.secondaryColor
+                color: theme.submitColor
             }">
                 <FontAwesomeIcon icon="arrow-circle-up" />
             </button>

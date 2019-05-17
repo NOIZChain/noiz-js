@@ -1,12 +1,12 @@
 <template>
     <div class="component-chat-message-block">
         <div class="message-block" v-bind:class="{ bot: who.toLowerCase() === 'bot', client: who.toLowerCase() === 'client' }">
-            <div class="chat-bubble">
+            <div class="chat-bubble" :style="{ backgroundColor: blockColor }">
                 {{ message }}
             </div>
         </div>
         <div class="answer-block" v-if="answers.length > 0">
-            <button class="answer" v-for="(answer, index) in answers" v-on:click="onClickAnswer(index, answer.stringValue, $event)" v-bind:class="{ selected: index === selectedIdx }" :key="index">
+            <button class="answer" v-for="(answer, index) in answers" v-on:click="onClickAnswer(index, answer.stringValue, $event)" v-bind:style="{ backgroundColor: answerColor(index === selectedIdx), border: theme.answerBorder }" :key="index">
                 {{ answer.stringValue }}
             </button>
         </div>
@@ -14,8 +14,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Inject } from 'vue-property-decorator';
 import { IChatMessage } from '@/generated/schema-types';
+import { ChatTheme } from '../state/types';
 
 @Component({
     components: {
@@ -29,11 +30,21 @@ export default class ChatMessageBlock extends Vue {
     @Prop() answers!: string[]
     @Prop() onSend!: (message: string) => any
 
+    @Inject() readonly theme!: ChatTheme
+
     selectedIdx: number = -1
 
     onClickAnswer(idx, value, e: Event) {
         this.selectedIdx = idx
         this.onSend(value)
+    }
+
+    answerColor(isSelected) {
+        return isSelected ? this.theme.answerSelectedColor : undefined
+    }
+
+    get blockColor() {
+        return this.who.toLowerCase() === 'bot' ? this.theme.botColor : this.theme.clientColor
     }
 }
 </script>
@@ -53,7 +64,6 @@ export default class ChatMessageBlock extends Vue {
             justify-content: flex-start;
             
             .chat-bubble {
-                background-color: rgb(220, 130, 50);
                 border-radius: 0 10px 10px 10px;
                 text-align: left;
             }
@@ -63,7 +73,6 @@ export default class ChatMessageBlock extends Vue {
             justify-content: flex-end;
 
             .chat-bubble {
-                background-color: rgb(151, 30, 30);
                 border-radius: 10px 10px 0 10px;
                 text-align: right;
             }
@@ -80,12 +89,14 @@ export default class ChatMessageBlock extends Vue {
     }
 
     .answer-block {
-        display: grid;
+        display: flex;
+        flex-wrap: wrap;
         grid-template-columns: repeat(2 ,minmax(200px, 1fr));
 
         .answer {
+            flex-basis: calc(50% - 20px);
             background-color: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgb(220, 130, 50);
+            border: none;
             border-radius: 50px;
             color: #fff;
             cursor: pointer;
@@ -95,10 +106,6 @@ export default class ChatMessageBlock extends Vue {
             outline: none;
             padding: 10px;
             text-align: center;
-        }
-
-        .selected {
-            background-color: rgb(220, 130, 50);
         }
     }
 }

@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve",
     "generate": "$(npm bin)/ts-node ./src/scripts/generate-types.ts --project ./generate-tsconfig.json",
     "build": "vue-cli-service build",
+    "build:mcdonalds": "vue-cli-service build --target lib --name McDonaldsChat 'src/views/McDonaldsChat.vue'",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },

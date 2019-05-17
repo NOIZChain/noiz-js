@@ -7,7 +7,6 @@
 <script lang="ts">
 import Background from '@/components/Background.vue';
 import { Component, Prop, Vue, Inject, Provide } from 'vue-property-decorator';
-import { ChatTheme } from './apps/ChatApp/state/types';
 
 @Component({
   components: {
@@ -15,12 +14,6 @@ import { ChatTheme } from './apps/ChatApp/state/types';
   }
 })
 export default class App extends Vue {
-  @Provide() theme: ChatTheme = {
-    logo: '/brand/mcdonalds.png',
-    backgroundImage: '/brand/background-chat.png',
-    primaryColor: 'rgb(151, 30, 30)',
-    secondaryColor: '#FEBF06'
-  }
 }
 </script>
 

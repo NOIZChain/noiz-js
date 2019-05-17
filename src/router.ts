@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import McDonaldsChat from './views/McDonaldsChat.vue'
+import ParisHotel from './views/ParisHotel/index.vue'
 
 Vue.use(Router);
 
@@ -12,6 +14,16 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/mcdonalds',
+      name: 'mcdonalds',
+      component: McDonaldsChat
+    },
+    {
+      path: '/paris-hotel',
+      name: 'paris-hotel',
+      component: ParisHotel
     },
     {
       path: '/about',
