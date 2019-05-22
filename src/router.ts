@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import McDonaldsChat from './views/McDonaldsChat.vue'
 import ParisHotel from './views/ParisHotel/index.vue'
+import NoizExample from './views/NoizExample/index.vue'
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/paris-hotel',
       name: 'paris-hotel',
       component: ParisHotel
+    },
+    {
+      path: '/noiz-test',
+      name: 'noiz-test',
+      component: NoizExample
     },
     {
       path: '/about',

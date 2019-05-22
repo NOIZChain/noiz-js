@@ -9,12 +9,12 @@
                 <img class="brand-logo" :src="theme.logo" :style="{ maxHeight: headerHeight }" />
             </div>
         </div>
+        <ChatArea :messages="conversation" :onSend="onSend"/>
+        <ChatInput :onSend="onSend" :onFocus="startConversation" />
         <StripCta v-if="size.height >= 300">
             <span>{{ $t('poweredBy') }}</span>
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
-        <ChatArea :messages="conversation" :onSend="onSend"/>
-        <ChatInput :onSend="onSend" :onFocus="startConversation" />
     </App>
 </template>
 
@@ -34,10 +34,10 @@ import StripCta from '@/components/StripCta.vue'
 import ChatArea from './components/ChatArea.vue'
 import ChatInput from './components/ChatInput.vue'
 import { ChatTheme, ChatMessageCallback } from './state/types'
-import { IChatMessage, IChatMessageInput } from '../../generated/schema-types';
-import { NLPChat } from '../../client/nlp';
+import { IChatMessage, IChatMessageInput } from '@/generated/schema-types';
+import { NLPChat } from '@/client/nlp';
 import { executeSequence, delay } from '@/utils/flow'
-import { createLocalization } from '../../locale';
+import { createLocalization } from '@/locale';
 import VueI18n from 'vue-i18n';
 
 Vue.use(VueI18n)
