@@ -3,8 +3,8 @@
         :theme="theme"
         firstMessage="I will answer all the questions"
         :size="{
-            width: 320,
-            height: 460
+            width: 300,
+            height: 500
         }"
             />
 </template>
@@ -16,7 +16,7 @@ import {
     Prop,
     Provide
 } from 'vue-property-decorator';
-import ChatApp from './components/ChatApp/index.vue';
+import ChatApp from '@/apps/ChatApp/index.vue';
 import { AppSize } from '@/components/App';
 import { ChatTheme } from '@/apps/ChatApp/state/types';
 import { nlpChat } from '@/noiz'
@@ -26,18 +26,20 @@ import { nlpChat } from '@/noiz'
         ChatApp
     },
 })
-export default class McDonaldsChat extends Vue {
+export default class NoizExample extends Vue {
     nlpChat = nlpChat
     theme: ChatTheme = {
         logo: require('./assets/logo.png'),
         backgroundImage: require('./assets/background.jpg'),
-        headerColor: '#000000',
+        headerColor: '#ffffff',
         headerJustification: 'left',
-        botColor: '#AE9264',
-        clientColor: '#000000',
+        botColor: '#5ADC6E',
+        botTextColor: '#000000',
+        clientColor: '#11478A',
         headerHeight: '50px',
-        answerBorder: 'none',
-        answerSelectedColor: '#000000'
+        headerMobileHeight: '25px',
+        answerBorder: '1px solid #ffffff',
+        answerSelectedColor: '#4C4C4C'
     }
 }
 </script>
