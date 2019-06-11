@@ -31,8 +31,8 @@ export default class McDonaldsChat extends Vue {
     nlpChat = nlpChat
 
     theme: ChatTheme = {
-            logo: '/brand/mcdonalds.png',
-            backgroundImage: '/brand/background-chat.png',
+            logo: 'brand/mcdonalds.png',
+            backgroundImage: 'brand/background-chat.png',
             headerColor: 'rgb(151, 30, 30)',
             headerJustification: 'right',
             headerHeight: '80px',

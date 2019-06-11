@@ -5,7 +5,7 @@
             :class="{ 
                 [theme.headerJustification]: true
             }">
-            <div class="logo-block">
+            <div class="logo-block" id="bg-exit">
                 <img class="brand-logo" :src="theme.logo" :style="{ maxHeight: headerHeight }" />
             </div>
         </div>
@@ -54,6 +54,7 @@ const i18n = createLocalization()
         ChatInput,
         App
     },
+    i18n
 })
 export default class ChatApp extends Vue {
     @Prop() nlpChat!: NLPChat
