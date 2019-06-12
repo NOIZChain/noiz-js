@@ -26,7 +26,7 @@ import {
     Inject,
     Provide
 } from 'vue-property-decorator';
-import { Enabler } from '@/ad-network/studio/Enabler.js';
+import '@/ad-network/studio/Enabler.js';
 import { App, AppSize } from '@/components/App';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Button from '@/components/Button.vue'
