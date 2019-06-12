@@ -1,9 +1,9 @@
 <template>
     <ChatApp :nlpChat="nlpChat" 
         :theme="theme"
-        firstMessage="I will answer all the questions"
+        firstMessage="Book room"
         :size="{
-            width: 300,
+            width: 430,
             height: 500
         }"
             />
