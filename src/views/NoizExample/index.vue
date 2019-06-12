@@ -1,11 +1,7 @@
 <template>
-    <ChatApp :nlpChat="nlpChat" 
+    <ChatApp class="noiz-chat-app" :nlpChat="nlpChat" 
         :theme="theme"
         firstMessage="Book room"
-        :size="{
-            width: 430,
-            height: 500
-        }"
             />
 </template>
 
@@ -45,5 +41,5 @@ export default class NoizExample extends Vue {
 </script>
 
 <style scoped lang="scss">
-
+    
 </style>

@@ -61,8 +61,8 @@ export default class ChatApp extends Vue {
     @Prop() firstMessage!: string
     @Prop({
         default: () => ({
-            width: 400,
-            height: 530
+            width: undefined,
+            height: undefined
         })
     }) size!: AppSize
     @Provide() @Prop() theme!: ChatTheme

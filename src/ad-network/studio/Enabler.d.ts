@@ -1,3 +1,4 @@
 export class Enabler {
-    static exit(): any
+    static exit(exitName?: string): any
+    static exitOverride(exitName: string, url: string)
 }

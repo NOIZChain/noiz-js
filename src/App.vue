@@ -11,7 +11,7 @@ import { Component, Prop, Vue, Inject, Provide } from 'vue-property-decorator';
 @Component({
   components: {
     Background
-  }
+  }  
 })
 export default class App extends Vue {
 }

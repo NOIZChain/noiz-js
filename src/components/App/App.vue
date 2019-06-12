@@ -12,18 +12,15 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
     }
 })
 export default class App extends Vue {
-    @Prop({
-        default: 400
-    }) width!: number
-    @Prop({
-        default: 530
-    }) height!: number
+    @Prop() width!: number
+    @Prop() height!: number
 }
 </script>
 
 <style scoped lang="scss">
 .component-app {
     display: flex;
+    flex: 1 1 auto;
     flex-flow: column;
     margin: 0 auto;
     overflow: hidden;

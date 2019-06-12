@@ -1,5 +1,5 @@
 <template>
-    <App class="app-chat" :width="size.width" :height="size.height">
+    <App class="app-chat" :width="$vssWidth" :height="$vssHeight">
         <div class="brand-header" 
             :style="{ backgroundColor: theme.headerColor, height: headerHeight }"
             :class="{ 
@@ -9,7 +9,7 @@
                 <img class="brand-logo" :src="theme.logo" :style="{ maxHeight: headerHeight }" />
             </div>
         </div>
-        <StripCta v-if="size.height >= 300">
+        <StripCta v-if="$vssHeight >= 300">
             <span>{{ $t('poweredBy') }}</span>
             <img :src="require('@/assets/logo-noiz.png')" />
         </StripCta>
@@ -26,7 +26,7 @@ import {
     Inject,
     Provide
 } from 'vue-property-decorator';
-import '@/ad-network/studio/Enabler.js';
+import { Enabler } from '@/ad-network/studio/Enabler.js';
 import { App, AppSize } from '@/components/App';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Button from '@/components/Button.vue'
@@ -40,8 +40,10 @@ import { NLPChat } from '../../client/nlp';
 import { executeSequence, delay } from '@/utils/flow'
 import { createLocalization } from '../../locale';
 import VueI18n from 'vue-i18n';
+import VueScreenSize from 'vue-screen-size';
 
 Vue.use(VueI18n)
+Vue.use(VueScreenSize)
 
 const i18n = createLocalization()
 
@@ -63,8 +65,8 @@ export default class ChatApp extends Vue {
     @Prop() firstMessage!: string
     @Prop({
         default: () => ({
-            width: 400,
-            height: 530
+            width: undefined,
+            height: undefined
         })
     }) size!: AppSize
     @Provide() @Prop() theme!: ChatTheme
@@ -136,7 +138,7 @@ export default class ChatApp extends Vue {
     }
 
     get headerHeight() {
-        if (this.size.height > 300) {
+        if (typeof this.size.height === 'number' ? this.size.height : this['$vssHeight'] > 300) {
             return this.theme.headerHeight
         } else {
             return this.theme.headerMobileHeight
@@ -144,12 +146,14 @@ export default class ChatApp extends Vue {
     }
 
     onClickExit(e: Event) {
-        Enabler.exit('Background exit')
+        // Enabler.exit('Background exit')
+        Enabler.exitOverride('Dynamic URL exit', 'https://noizchain.com/')
     }
 }
 </script>
 
 <style scoped lang="scss">
+
 .app-chat {
     .brand-header {
         background-color: #FFFFFF;
