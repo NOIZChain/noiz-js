@@ -5,37 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="ad.size" content="width=400,height=530">
-    <title>McDonald's</title>
-    <script src="./Enabler.js"></script>
+    <title>Noiz</title>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but test-app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app">
-      <chat></chat>
-    </div>
+    <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
 </html>
-
-<script>
-    window.onload = function() {
-    if (Enabler.isInitialized()) {
-      enablerInitHandler();
-    } else {
-      Enabler.addEventListener(studio.events.StudioEvent.INIT, enablerInitHandler);
-    }
-  }
-  
-  function enablerInitHandler() {
-    // Start polite loading, or start animation,
-    // load in your image assets, call Enabler methods,
-    // and/or include other Studio modules.
-    new Vue({
-      components: {
-        chat: McDonaldsChat
-      }
-    }).$mount('#app')
-  }
-  </script>

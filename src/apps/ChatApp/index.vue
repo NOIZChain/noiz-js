@@ -5,7 +5,7 @@
             :class="{ 
                 [theme.headerJustification]: true
             }">
-            <div class="logo-block" id="bg-exit">
+            <div class="logo-block" @click="onClickExit($event)">
                 <img class="brand-logo" :src="theme.logo" :style="{ maxHeight: headerHeight }" />
             </div>
         </div>
@@ -26,6 +26,7 @@ import {
     Inject,
     Provide
 } from 'vue-property-decorator';
+import '@/ad-network/studio/Enabler.js';
 import { App, AppSize } from '@/components/App';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 import Button from '@/components/Button.vue'
@@ -140,6 +141,10 @@ export default class ChatApp extends Vue {
         } else {
             return this.theme.headerMobileHeight
         }
+    }
+
+    onClickExit(e: Event) {
+        Enabler.exit('Background exit')
     }
 }
 </script>

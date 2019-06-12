@@ -31,16 +31,16 @@ export default class McDonaldsChat extends Vue {
     nlpChat = nlpChat
 
     theme: ChatTheme = {
-            logo: 'brand/mcdonalds.png',
-            backgroundImage: 'brand/background-chat.png',
-            headerColor: 'rgb(151, 30, 30)',
-            headerJustification: 'right',
-            headerHeight: '80px',
-            botColor: 'rgb(151, 30, 30)',
-            clientColor: '#DC8233',
-            submitColor: '#FEBF06',
-            answerBorder: '1px solid rgb(220, 130, 50)'
-        }
+        logo: '/brand/mcdonalds.png',
+        backgroundImage: '/brand/background-chat.png',
+        headerColor: 'rgb(151, 30, 30)',
+        headerJustification: 'right',
+        headerHeight: '80px',
+        botColor: 'rgb(151, 30, 30)',
+        clientColor: '#DC8233',
+        submitColor: '#FEBF06',
+        answerBorder: '1px solid rgb(220, 130, 50)'
+    }
 }
 </script>
 
