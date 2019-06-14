@@ -11,7 +11,7 @@
         </div>
         <StripCta v-if="$vssHeight >= 300">
             <span>{{ $t('poweredBy') }}</span>
-            <img :src="require('@/assets/logo-noiz.png')" />
+            <img src="https://noiz.emmert.io/img/logo.png" />
         </StripCta>
         <ChatArea :messages="conversation" :onSend="onSend"/>
         <ChatInput :onSend="onSend" :onFocus="startConversation" />

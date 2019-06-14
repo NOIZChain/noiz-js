@@ -25,8 +25,8 @@ import { nlpChat } from '@/noiz'
 export default class NoizExample extends Vue {
     nlpChat = nlpChat
     theme: ChatTheme = {
-        logo: require('./assets/logo.png'),
-        backgroundImage: require('./assets/background.jpg'),
+        logo: 'https://noiz.emmert.io/img/logo.png',
+        backgroundImage: 'https://noiz.emmert.io/img/background.jpg',
         headerColor: '#ffffff',
         headerJustification: 'left',
         botColor: '#5ADC6E',
