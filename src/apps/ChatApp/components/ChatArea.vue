@@ -5,9 +5,9 @@
                 v-for="(message, index) in reverseMessages"
                 :key="reverseMessages.length - 1 - index"
                 :data-index="reverseMessages.length - 1 - index"
-                :message="message.value.stringValue"
+                :message="message.value.text"
                 :who="message.who"
-                :answers="message.answers"
+                :actions="message.actions"
                 :onSend="onSend"
             />
         </transition-group>

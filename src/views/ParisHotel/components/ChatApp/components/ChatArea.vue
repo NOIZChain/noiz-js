@@ -7,7 +7,7 @@
                 :data-index="reverseMessages.length - 1 - index"
                 :message="message.value.stringValue"
                 :who="message.who"
-                :answers="message.answers"
+                :actions="message.actions"
                 :onSend="onSend"
             />
         </transition-group>
