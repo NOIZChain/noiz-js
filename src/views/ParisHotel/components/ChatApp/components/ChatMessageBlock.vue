@@ -101,7 +101,7 @@ export default class ChatMessageBlock extends Vue {
         }
     }
 
-    .answer-block {
+    .action-block {
         display: flex;
         flex-wrap: wrap;
         grid-template-columns: repeat(2 ,minmax(200px, 1fr));

@@ -8,7 +8,7 @@
                 {{ message }}
             </div>
         </div>
-        <div class="answer-block" v-if="answers && answers.length > 0">
+        <!-- <div class="answer-block" v-if="answers && answers.length > 0">
             <button class="answer" 
                 v-for="(action, index) in actions" 
                 v-on:click="onClickAnswer(index, action.text, $event)" 
@@ -18,13 +18,28 @@
                 :key="index">
                 {{ action.text }}
             </button>
+        </div> -->
+        <div class="action-block" v-if="actions && actions.length > 0">
+            <div class="action" 
+                v-for="(action, index) in actions"
+                :key="index">
+                <button class="answer" 
+                    v-if="action.type === IChatActionType.ANSWER"
+                    v-on:click="onClickAnswer(index, answer.stringValue, $event)" 
+                    v-bind:style="{ 
+                        backgroundColor: answerColor(index === selectedIdx), border: theme.answerBorder 
+                    }" 
+                    :key="index">
+                    {{ answer.stringValue }}
+                </button>
+            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue, Inject } from 'vue-property-decorator';
-import { IChatMessage } from '@/generated/schema-types';
+import { IChatMessage, IChatAction } from '@/generated/schema-types';
 import { ChatTheme } from '../state/types';
 
 @Component({
@@ -36,7 +51,7 @@ import { ChatTheme } from '../state/types';
 export default class ChatMessageBlock extends Vue {
     @Prop() message!: string
     @Prop() who!: string
-    @Prop() actions!: string[]
+    @Prop() actions!: IChatAction[]
     @Prop() onSend!: (message: string) => any
 
     @Inject() readonly theme!: ChatTheme
