@@ -35,7 +35,7 @@ import StripCta from '@/components/StripCta.vue'
 import ChatArea from './components/ChatArea.vue'
 import ChatInput from './components/ChatInput.vue'
 import { ChatTheme, ChatMessageCallback } from './state/types'
-import { IChatMessage, IChatMessageInput } from '../../generated/schema-types';
+import { IChatMessage, IChatMessageInput, IChatValueType } from '../../generated/schema-types';
 import { NLPChat } from '../../client/nlp';
 import { executeSequence, delay } from '@/utils/flow'
 import { createLocalization } from '../../locale';
@@ -103,11 +103,11 @@ export default class ChatApp extends Vue {
         if (!messageText || messageText.length === 0) return
         
         const clientMessage: IChatMessage = {
-            answers: [],
+            actions: [],
             who: 'client',
             value: {
-                kind: 'stringValue',
-                stringValue: messageText
+                type: IChatValueType.TEXT,
+                text: messageText
             }
         }
 

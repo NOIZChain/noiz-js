@@ -2,12 +2,12 @@ mutation sendMessage($sessionId: String!, $message: ChatMessageInput!) {
   sendMessage(sessionId: $sessionId, message: $message) {
     who
     value {
-      kind
-      stringValue
+      type
+      text
     }
-    answers {
-      kind
-      stringValue
+    actions {
+      type
+      text
     }
   }
 }

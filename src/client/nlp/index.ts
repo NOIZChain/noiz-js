@@ -1,6 +1,6 @@
 import { Noiz } from '..';
 import sendMessage from './graphql/sendMessage.graphql'
-import { IMutationsendMessageArgs, ISenderType } from '@/generated/schema-types'
+import { IMutationsendMessageArgs, ISenderType, IChatValueType } from '@/generated/schema-types'
 export class NLPChat {
     readonly noiz: Noiz
 
@@ -14,8 +14,8 @@ export class NLPChat {
             message: {
                 who: ISenderType.CLIENT,
                 value: {
-                    kind: 'text',
-                    stringValue: text
+                    type: IChatValueType.TEXT,
+                    text
                 }
             }
         })

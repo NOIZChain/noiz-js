@@ -12,12 +12,12 @@ mutation initSession($info: SessionInput!) {
     messages {
       who
       value {
-        kind
-        stringValue
+        type
+        text
       }
-      answers {
-        kind
-        stringValue
+      actions {
+        type
+        text
       }
     }
   }
