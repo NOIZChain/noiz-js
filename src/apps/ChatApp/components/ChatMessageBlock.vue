@@ -1,6 +1,6 @@
 <template>
     <div class="component-chat-message-block">
-        <div class="message-block" v-bind:class="{ bot: who.toLowerCase() === 'bot', client: who.toLowerCase() === 'client' }">
+        <div v-if="message" class="message-block" v-bind:class="{ bot: who.toLowerCase() === 'bot', client: who.toLowerCase() === 'client' }">
             <div class="chat-bubble" :style="{ 
                 backgroundColor: blockColor,
                 color: blockTextColor
