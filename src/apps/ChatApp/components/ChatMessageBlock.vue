@@ -8,15 +8,15 @@
                 {{ message }}
             </div>
         </div>
-        <div class="answer-block" v-if="answers.length > 0">
+        <div class="answer-block" v-if="actions.length > 0">
             <button class="answer" 
-                v-for="(answer, index) in answers" 
-                v-on:click="onClickAnswer(index, answer.stringValue, $event)" 
+                v-for="(action, index) in actions" 
+                v-on:click="onClickAnswer(index, action.text, $event)" 
                 v-bind:style="{ 
                     backgroundColor: answerColor(index === selectedIdx), border: theme.answerBorder 
                 }" 
                 :key="index">
-                {{ answer.stringValue }}
+                {{ action.text }}
             </button>
         </div>
     </div>
@@ -36,7 +36,7 @@ import { ChatTheme } from '../state/types';
 export default class ChatMessageBlock extends Vue {
     @Prop() message!: string
     @Prop() who!: string
-    @Prop() answers!: string[]
+    @Prop() actions!: string[]
     @Prop() onSend!: (message: string) => any
 
     @Inject() readonly theme!: ChatTheme
