@@ -8,7 +8,7 @@
                 {{ message }}
             </div>
         </div>
-        <div class="answer-block" v-if="answers.length > 0">
+        <div class="answer-block" v-if="answers && answers.length > 0">
             <button class="answer" 
                 v-for="(answer, index) in answers" 
                 v-on:click="onClickAnswer(index, answer.stringValue, $event)" 
