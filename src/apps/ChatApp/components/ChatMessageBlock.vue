@@ -25,7 +25,8 @@
                     v-else-if="action.type === IChatActionType.ICON_BUTTON"
                     :href="action.url" target="_blank"
                     @click.prevent="onClickExit(action.url, $event)">
-                    <img :src="action.icon" />
+                    <!-- <font-awesome-icon prefix="fab" :icon="action.icon" /> -->
+                    <font-awesome-icon :icon="action.icon.split(/[\s,|]+/g)" />
                 </a>
                 <a
                     v-else-if="action.type === IChatActionType.LINK"
@@ -56,12 +57,19 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Inject } from 'vue-property-decorator';
-import { IChatMessage, IChatAction } from '@/generated/schema-types';
 import { ChatTheme } from '../state/types';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { library, IconPack, IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faSms } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { IChatMessage, IChatAction, IChatActionType } from '@/generated/schema-types';
+
+library.add(faEnvelope, faSms, faWhatsapp as IconDefinition)
 
 @Component({
     components: {
-
+        FontAwesomeIcon
     },
 })
 
@@ -72,6 +80,8 @@ export default class ChatMessageBlock extends Vue {
     @Prop() onSend!: (message: string) => any
 
     @Inject() readonly theme!: ChatTheme
+
+    IChatActionType = IChatActionType
 
     selectedIdx: number = -1
 
@@ -95,6 +105,12 @@ export default class ChatMessageBlock extends Vue {
     get blockTextColor() {
         return this.who.toLowerCase() === 'bot' ? this.theme.botTextColor : this.theme.clientTextColor
     }
+
+    get envelope() { return faEnvelope }
+
+    get sms() { return faSms }
+
+    get whatsapp() { return faWhatsapp }
 }
 </script>
 

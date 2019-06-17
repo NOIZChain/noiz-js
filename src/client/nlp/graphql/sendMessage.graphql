@@ -8,6 +8,9 @@ mutation sendMessage($sessionId: String!, $message: ChatMessageInput!) {
     actions {
       type
       text
+      url
+      src
+      icon
     }
   }
 }

@@ -15,8 +15,8 @@
 import Background from '@/components/Background.vue';
 import { Component, Prop, Vue, Inject } from 'vue-property-decorator';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 import { ChatTheme } from '../state/types';
 
 library.add(faArrowCircleUp)
