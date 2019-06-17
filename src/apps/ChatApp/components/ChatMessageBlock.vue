@@ -8,17 +8,6 @@
                 {{ message }}
             </div>
         </div>
-        <!-- <div class="answer-block" v-if="answers && answers.length > 0">
-            <button class="answer" 
-                v-for="(action, index) in actions" 
-                v-on:click="onClickAnswer(index, action.text, $event)" 
-                v-bind:style="{ 
-                    backgroundColor: answerColor(index === selectedIdx), border: theme.answerBorder 
-                }" 
-                :key="index">
-                {{ action.text }}
-            </button>
-        </div> -->
         <div class="action-block" v-if="actions && actions.length > 0">
             <div class="action" 
                 v-for="(action, index) in actions"
@@ -30,8 +19,32 @@
                         backgroundColor: answerColor(index === selectedIdx), border: theme.answerBorder 
                     }" 
                     :key="index">
-                    {{ answer.stringValue }}
+                    {{ action.text }}
                 </button>
+                <a
+                    v-else-if="action.type === IChatActionType.ICON_BUTTON"
+                    :href="action.url" target="_blank">
+                    <img :src="action.icon" />
+                </a>
+                <a
+                    v-else-if="action.type === IChatActionType.LINK"
+                    :href="action.url" target="_blank">
+                    {{ action.text }}
+                </a>
+                <a
+                    v-else-if="action.type === IChatActionType.BUTTON"
+                    :href="action.url" target="_blank">
+                    <button>{{ action.text }}</button>
+                </a>
+                <a
+                    v-else-if="action.type === IChatActionType.IMAGE"
+                    :href="action.url" target="_blank">
+                    <img :src="action.src" />
+                </a>
+                <!-- <div
+                    v-else-if="action.type === IChatActionType.VIDEO">
+                    TODO
+                </div> -->
             </div>
         </div>
     </div>
