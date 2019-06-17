@@ -14,31 +14,35 @@
                 :key="index">
                 <button class="answer" 
                     v-if="action.type === IChatActionType.ANSWER"
-                    v-on:click="onClickAnswer(index, answer.stringValue, $event)" 
                     v-bind:style="{ 
                         backgroundColor: answerColor(index === selectedIdx), border: theme.answerBorder 
-                    }" 
+                    }"
+                    @click="onClickAnswer(index, answer.stringValue, $event)"
                     :key="index">
                     {{ action.text }}
                 </button>
                 <a
                     v-else-if="action.type === IChatActionType.ICON_BUTTON"
-                    :href="action.url" target="_blank">
+                    :href="action.url" target="_blank"
+                    @click.prevent="onClickExit(action.url, $event)">
                     <img :src="action.icon" />
                 </a>
                 <a
                     v-else-if="action.type === IChatActionType.LINK"
-                    :href="action.url" target="_blank">
+                    :href="action.url" target="_blank"
+                    @click.prevent="onClickExit(action.url, $event)">
                     {{ action.text }}
                 </a>
                 <a
                     v-else-if="action.type === IChatActionType.BUTTON"
-                    :href="action.url" target="_blank">
+                    :href="action.url" target="_blank"
+                    @click.prevent="onClickExit(action.url, $event)">
                     <button>{{ action.text }}</button>
                 </a>
                 <a
                     v-else-if="action.type === IChatActionType.IMAGE"
-                    :href="action.url" target="_blank">
+                    :href="action.url" target="_blank"
+                    @click.prevent="onClickExit(action.url, $event)">
                     <img :src="action.src" />
                 </a>
                 <!-- <div
@@ -74,6 +78,10 @@ export default class ChatMessageBlock extends Vue {
     onClickAnswer(idx, value, e: Event) {
         this.selectedIdx = idx
         this.onSend(value)
+    }
+
+    onClickExit(url: string, e: Event) {
+        Enabler.exitOverride('Dynamic URL exit', url)
     }
 
     answerColor(isSelected) {
