@@ -1,7 +1,6 @@
 <template>
     <ChatApp class="noiz-chat-app" :nlpChat="nlpChat" 
         :theme="theme"
-        firstMessage="Book room"
             />
 </template>
 
