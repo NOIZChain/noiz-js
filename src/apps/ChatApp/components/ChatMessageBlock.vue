@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="action-block" v-if="actions && actions.length > 0">
-            <div class="action" 
+            <div class="action"
                 v-for="(action, index) in actions"
                 :key="index">
                 <button class="answer" 
@@ -21,32 +21,28 @@
                     :key="index">
                     {{ action.text }}
                 </button>
-                <a
+                <font-awesome-icon class="icon-button"
                     v-else-if="action.type === IChatActionType.ICON_BUTTON"
-                    :href="action.url" target="_blank"
-                    @click.prevent="onClickExit(action.url, $event)">
-                    <!-- <font-awesome-icon prefix="fab" :icon="action.icon" /> -->
-                    <font-awesome-icon :icon="action.icon.split(/[\s,|]+/g)" />
-                </a>
-                <a
+                    target="_blank" @click.prevent="onClickExit(action.url, $event)"
+                    :icon="action.icon.split(/[\s,|]+/g)" size="3x" />
+                <p class="link"
                     v-else-if="action.type === IChatActionType.LINK"
                     :href="action.url" target="_blank"
                     @click.prevent="onClickExit(action.url, $event)">
                     {{ action.text }}
-                </a>
-                <a
+                </p>
+                <button class="button"
                     v-else-if="action.type === IChatActionType.BUTTON"
                     :href="action.url" target="_blank"
                     @click.prevent="onClickExit(action.url, $event)">
-                    <button>{{ action.text }}</button>
-                </a>
-                <a
+                    {{ action.text }}
+                </button>
+                <img class="image"
                     v-else-if="action.type === IChatActionType.IMAGE"
                     :href="action.url" target="_blank"
-                    @click.prevent="onClickExit(action.url, $event)">
-                    <img :src="action.src" />
-                </a>
-                <!-- <div
+                    @click.prevent="onClickExit(action.url, $event)"
+                    :src="action.src" />
+                <!-- <div class="video"
                     v-else-if="action.type === IChatActionType.VIDEO">
                     TODO
                 </div> -->
@@ -153,24 +149,74 @@ export default class ChatMessageBlock extends Vue {
         }
     }
 
-    .answer-block {
+    .action-block {
         display: flex;
         flex-wrap: wrap;
         grid-template-columns: repeat(2 ,minmax(200px, 1fr));
 
-        .answer {
-            flex-basis: calc(50% - 20px);
-            background-color: rgba(0, 0, 0, 0.25);
-            border: none;
-            border-radius: 50px;
-            color: #fff;
-            cursor: pointer;
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-            font-size: 14px;
-            margin: 5px 10px 5px 10px;
-            outline: none;
-            padding: 10px;
-            text-align: center;
+        .action {
+
+            .answer {
+                flex-basis: calc(50% - 20px);
+                background-color: rgba(0, 0, 0, 0.25);
+                border: none;
+                border-radius: 50px;
+                color: #fff;
+                cursor: pointer;
+                font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                font-size: 14px;
+                margin: 5px 10px 5px 10px;
+                outline: none;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .button {
+                flex-basis: calc(50% - 20px);
+                background-color: rgba(0, 0, 0, 0.25);
+                border: none;
+                border-radius: 50px;
+                color: #fff;
+                cursor: pointer;
+                font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                font-size: 14px;
+                margin: 5px 10px 5px 10px;
+                outline: none;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .icon-button {
+                flex-basis: calc(50% - 20px);
+                color: #fff;
+                cursor: pointer;
+                margin: 5px 10px 5px 10px;
+                padding: 10px;
+            }
+
+            .image {
+                flex-basis: calc(50% - 20px);
+                cursor: pointer;
+                margin: 5px 10px 5px 10px;
+                padding: 10px;
+            }
+
+            .link {
+                flex-basis: calc(50% - 20px);
+                color: #fff;
+                cursor: pointer;
+                margin: 5px 10px 5px 10px;
+                padding: 10px;
+            }
+
+            .video {
+                flex-basis: calc(50% - 20px);
+                color: #fff;
+                cursor: pointer;
+                margin: 5px 10px 5px 10px;
+                padding: 10px;
+            }
+            
         }
     }
 }
