@@ -21,6 +21,7 @@
     "axios": "^0.18.0",
     "graphql": "^14.2.1",
     "graphql-tag": "^2.10.1",
+    "platform-detect": "^2.0.3",
     "ts-node": "^8.1.0",
     "tsconfig-paths": "^3.8.0",
     "vue": "^2.6.6",

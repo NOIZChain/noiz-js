@@ -12,40 +12,39 @@
             <div class="action"
                 v-for="(action, index) in actions"
                 :key="index">
-                <button class="answer" 
-                    v-if="action.type === IChatActionType.ANSWER"
-                    v-bind:style="{ 
-                        backgroundColor: answerColor(index === selectedIdx), border: theme.answerBorder 
-                    }"
-                    @click="onClickAnswer(index, answer.stringValue, $event)"
-                    :key="index">
-                    {{ action.text }}
-                </button>
-                <font-awesome-icon class="icon-button"
-                    v-else-if="action.type === IChatActionType.ICON_BUTTON"
-                    target="_blank" @click.prevent="onClickExit(action.url, $event)"
-                    :icon="action.icon.split(/[\s,|]+/g)" size="2x" />
-                <p class="link"
-                    v-else-if="action.type === IChatActionType.LINK"
-                    :href="action.url" target="_blank"
-                    @click.prevent="onClickExit(action.url, $event)">
-                    {{ action.text }}
-                </p>
-                <button class="button"
-                    v-else-if="action.type === IChatActionType.BUTTON"
-                    :href="action.url" target="_blank"
-                    @click.prevent="onClickExit(action.url, $event)">
-                    {{ action.text }}
-                </button>
-                <img class="image"
-                    v-else-if="action.type === IChatActionType.IMAGE"
-                    :href="action.url" target="_blank"
-                    @click.prevent="onClickExit(action.url, $event)"
-                    :src="action.src" />
-                <!-- <div class="video"
-                    v-else-if="action.type === IChatActionType.VIDEO">
-                    TODO
-                </div> -->
+                <div v-if="shouldDisplayExit(action.url)">
+                    <button class="answer" 
+                        v-if="action.type === IChatActionType.ANSWER"
+                        v-bind:style="{ 
+                            backgroundColor: answerColor(index === selectedIdx), border: theme.answerBorder 
+                        }"
+                        @click="onClickAnswer(index, answer.stringValue, $event)"
+                        :key="index">
+                        {{ action.text }}
+                    </button>
+                    <font-awesome-icon class="icon-button"
+                        v-else-if="action.type === IChatActionType.ICON_BUTTON"
+                        target="_blank" @click.prevent="onClickExit(action.url, $event)"
+                        :icon="action.icon.split(/[\s,|]+/g)" size="2x" />
+                    <p class="link"
+                        v-else-if="action.type === IChatActionType.LINK"
+                        target="_blank" @click.prevent="onClickExit(action.url, $event)">
+                        {{ action.text }}
+                    </p>
+                    <button class="button"
+                        v-else-if="action.type === IChatActionType.BUTTON"
+                        target="_blank" @click.prevent="onClickExit(action.url, $event)">
+                        {{ action.text }}
+                    </button>
+                    <img class="image"
+                        v-else-if="action.type === IChatActionType.IMAGE"
+                        target="_blank" @click.prevent="onClickExit(action.url, $event)"
+                        :src="action.src" />
+                    <!-- <div class="video"
+                        v-else-if="action.type === IChatActionType.VIDEO">
+                        TODO
+                    </div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -60,6 +59,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faSms } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { IChatMessage, IChatAction, IChatActionType } from '@/generated/schema-types';
+import { shouldDisplayExit } from '@/utils/platform';
 
 library.add(faEnvelope, faSms, faWhatsapp as IconDefinition)
 
@@ -78,6 +78,7 @@ export default class ChatMessageBlock extends Vue {
     @Inject() readonly theme!: ChatTheme
 
     IChatActionType = IChatActionType
+    shouldDisplayExit = shouldDisplayExit
 
     selectedIdx: number = -1
 
