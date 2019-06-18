@@ -24,7 +24,7 @@
                 <font-awesome-icon class="icon-button"
                     v-else-if="action.type === IChatActionType.ICON_BUTTON"
                     target="_blank" @click.prevent="onClickExit(action.url, $event)"
-                    :icon="action.icon.split(/[\s,|]+/g)" size="3x" />
+                    :icon="action.icon.split(/[\s,|]+/g)" size="2x" />
                 <p class="link"
                     v-else-if="action.type === IChatActionType.LINK"
                     :href="action.url" target="_blank"
@@ -216,7 +216,7 @@ export default class ChatMessageBlock extends Vue {
                 margin: 5px 10px 5px 10px;
                 padding: 10px;
             }
-            
+
         }
     }
 }
