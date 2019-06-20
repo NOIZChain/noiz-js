@@ -3,7 +3,7 @@ import { NLPChat } from './client/nlp';
 
 
 export const noiz = new Noiz({
-  host: 'http://localhost:1337',
+  host: process.env.API_HOST || 'https://api.noiz.live',
   graphQLEndpoint: '/graphql'
 })
 
