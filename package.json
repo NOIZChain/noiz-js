@@ -7,7 +7,7 @@
     "generate": "$(npm bin)/ts-node ./src/scripts/generate-types.ts --project ./generate-tsconfig.json",
     "build": "vue-cli-service build",
     "build:mcdonalds": "vue-cli-service build --target lib --name McDonaldsChat 'src/views/McDonaldsChat.vue'",
-    "build:noiz": "vue-cli-service build --target app --name Noiz",
+    "build:noiz": "vue-cli-service build --target app --name Noiz; sed -i '' 's/\"javascript:\"/\"\"/g' dist/js/*.js",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
