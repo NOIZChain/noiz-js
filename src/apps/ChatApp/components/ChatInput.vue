@@ -1,7 +1,14 @@
 <template>
     <form name="chat-form" @submit="onSubmit" novalidate>
         <div class="component-chat-input-wrapper">
-            <input v-model="message" class="chat-input" @focus="onInputFocus($event)" name="message" type="text" :placeholder="$t('askSomething')" />
+            <input
+                class="chat-input"
+                v-model="message"
+                @focus="onInputFocus($event)"
+                name="message"
+                type="text"
+                :placeholder="$t('askSomething')"
+                autocomplete="off" />
             <button type="submit" class="submit-button" :style="{
                 color: theme.submitColor
             }">
