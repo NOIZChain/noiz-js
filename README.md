@@ -1,4 +1,4 @@
-# test-app
+# NOIZ
 
 ## Project setup
 ```
