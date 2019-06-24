@@ -88,11 +88,21 @@ export default class ChatMessageBlock extends Vue {
     }
 
     onClickExit(url: string, e: Event) {
-        Enabler.exitOverride('Dynamic URL exit', url)
+        if (this.isURLValidExit(url)) {
+            Enabler.exitOverride('Dynamic URL exit', url)
+        } else {
+            window.open(url)
+        }
     }
 
     answerColor(isSelected) {
         return isSelected ? this.theme.answerSelectedColor : undefined
+    }
+
+    isURLValidExit(url: string) {
+        const regex = new RegExp('^(tel|sms|mailto):.+$')
+
+        return regex.exec(url) === null
     }
 
     get blockColor() {
