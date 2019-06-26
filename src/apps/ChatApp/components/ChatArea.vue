@@ -5,6 +5,7 @@
                 <ChatMessageBlock class="chat-block"
                     v-for="(message, index) in messages"
                     :key="index"
+                    :class="{ [message.who.toLowerCase()]: true }"
                     :data-index="index"
                     :message="message && message.value && message.value.text"
                     :who="message.who"
@@ -51,12 +52,15 @@ export default class ChatArea extends Vue {
 
     .scroll-wrapper {
         display: flex;
+        flex-grow: 1;
         flex-flow: column;
         overflow-y: scroll;
+        overflow-x: hidden;
     }
 
     .chat-content {
         display: flex;
+        flex-grow: 1;
         flex-direction: column;
         width: 100%;
         justify-content: flex-end;
@@ -68,20 +72,25 @@ export default class ChatArea extends Vue {
         flex-shrink: 0;
         transition: transform .25s ease;
 
-        // &.slide-up-enter-to {
-        //     transform: translateY(0);
-        // }
+        &.bot {
+            &.slide-up-enter-to {
+                transform: translateX(0);
+            }
 
-        // &.slide-up-enter, &.slide-up-leave-to {
-        //     transform: translateY(50px);
-        // }
+            &.slide-up-enter, &.slide-up-leave-to {
+                transform: translateX(-100vw);
+            }
+        }
 
-        // &.slide-up-enter-active, &.slide-up-leave-active {
-        //     transform: translateY(200)
-        // }
-        // &.slide-up-enter, &.slide-up-leave-to /* .slide-up-leave-active below version 2.1.8 */ {
-        //     transform: translateY(0)
-        // }
+        &.client {
+            &.slide-up-enter-to {
+                transform: translateX(0);
+            }
+
+            &.slide-up-enter, &.slide-up-leave-to {
+                transform: translateX(100vw);
+            }
+        }
     }
 }
 </style>
