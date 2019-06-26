@@ -157,6 +157,7 @@ export default class ChatMessageBlock extends Vue {
             color: #fff;
             font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
             font-size: 14px;
+            max-width: 85%;
         }
     }
 
@@ -164,6 +165,8 @@ export default class ChatMessageBlock extends Vue {
         display: flex;
         flex-wrap: wrap;
         grid-template-columns: repeat(2 ,minmax(200px, 1fr));
+        padding-left: 10px;
+        padding-right: 10px;
 
         .action {
 
@@ -201,8 +204,10 @@ export default class ChatMessageBlock extends Vue {
                 flex-basis: calc(50% - 20px);
                 color: #fff;
                 cursor: pointer;
-                margin: 5px 10px 5px 10px;
-                padding: 10px;
+                // margin: 5px 10px 5px 10px;
+                padding: 5px 10px;
+                margin-bottom: 10px;
+                font-size: 42px;
             }
 
             .image {
