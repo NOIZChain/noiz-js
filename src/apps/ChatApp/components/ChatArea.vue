@@ -1,7 +1,7 @@
 <template>
     <Background class="component-chat-area" :src="theme.backgroundImage" >
         <div class="scroll-wrapper" v-chat-scroll>
-            <transition-group name="slide-up" tag="div" class="chat-content">
+            <transition-group name="slide-in" tag="div" class="chat-content">
                 <ChatMessageBlock class="chat-block"
                     v-for="(message, index) in messages"
                     :key="index"
@@ -73,21 +73,21 @@ export default class ChatArea extends Vue {
         transition: transform .25s ease;
 
         &.bot {
-            &.slide-up-enter-to {
+            &.slide-in-enter-to {
                 transform: translateX(0);
             }
 
-            &.slide-up-enter, &.slide-up-leave-to {
+            &.slide-in-enter, &.slide-in-leave-to {
                 transform: translateX(-100vw);
             }
         }
 
         &.client {
-            &.slide-up-enter-to {
+            &.slide-in-enter-to {
                 transform: translateX(0);
             }
 
-            &.slide-up-enter, &.slide-up-leave-to {
+            &.slide-in-enter, &.slide-in-leave-to {
                 transform: translateX(100vw);
             }
         }
