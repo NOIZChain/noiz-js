@@ -18,7 +18,7 @@
                         v-bind:style="{ 
                             backgroundColor: answerColor(index === selectedIdx), border: theme.answerBorder 
                         }"
-                        @click="onClickAnswer(index, answer.stringValue, $event)"
+                        @click="onClickAnswer(index, action, $event)"
                         :key="index">
                         {{ action.text }}
                     </button>
@@ -82,9 +82,13 @@ export default class ChatMessageBlock extends Vue {
 
     selectedIdx: number = -1
 
-    onClickAnswer(idx, value, e: Event) {
+    onClickAnswer(idx, action: IChatAction, e: Event) {
         this.selectedIdx = idx
-        this.onSend(value)
+        if (action.url) {
+            this.onClickExit(action.url, e)
+        } else if (action.text) {
+            this.onSend(action.text)
+        }
     }
 
     onClickExit(url: string, e: Event) {
@@ -179,7 +183,7 @@ export default class ChatMessageBlock extends Vue {
                 cursor: pointer;
                 font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
                 font-size: 14px;
-                margin: 5px 10px 5px 10px;
+                margin: 5px 5px 10px 5px;
                 outline: none;
                 padding: 10px;
                 text-align: center;
