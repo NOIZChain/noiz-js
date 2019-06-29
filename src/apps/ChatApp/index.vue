@@ -14,7 +14,7 @@
             <img src="https://noiz.emmert.io/img/logo.png" />
         </StripCta>
         <ChatArea :messages="conversation" :onSend="onSend"/>
-        <ChatInput :onSend="onSend" :onFocus="startConversation" />
+        <ChatInput :onSend="onSend" />
     </App>
 </template>
 
@@ -86,6 +86,9 @@ export default class ChatApp extends Vue {
 
         if (conversation) {
             this.conversation = conversation
+            if (this.firstMessage) {
+                this.startConversation()
+            }
         }
     }
 

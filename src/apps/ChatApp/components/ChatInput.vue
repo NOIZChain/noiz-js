@@ -50,7 +50,9 @@ export default class ChatInput extends Vue {
     }
 
     onInputFocus() {
-        this.onFocus()
+        if (typeof this.onFocus === 'function') {
+            this.onFocus()
+        }
     }
 
     clear() {
