@@ -1,4 +1,7 @@
 module.exports = {
+    transpileDependencies: [
+        'platform-detect'
+    ],
     chainWebpack: config => {
         config.module
           .rule('graphql')
