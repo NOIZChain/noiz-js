@@ -20,7 +20,10 @@
                         }"
                         @click="onClickAnswer(index, action, $event)"
                         :key="index">
-                        {{ action.text }}
+                        <!-- putting pics in  answer bots 
+                        -->
+                        <span v-if="!action.src">{{ action.text }}</span>
+                        <img class="image" v-if="action.src" :src="action.src" />
                     </button>
                     <font-awesome-icon class="icon-button"
                         v-else-if="action.type === IChatActionType.ICON_BUTTON"
@@ -39,7 +42,7 @@
                     <img class="image"
                         v-else-if="action.type === IChatActionType.IMAGE"
                         target="_blank" @click.prevent="onClickExit(action.url, $event)"
-                        :src="action.src" />
+                        :src="action.src" :alt="action.text" />
                     <!-- <div class="video"
                         v-else-if="action.type === IChatActionType.VIDEO">
                         TODO
@@ -217,8 +220,12 @@ export default class ChatMessageBlock extends Vue {
             .image {
                 flex-basis: calc(50% - 20px);
                 cursor: pointer;
-                margin: 5px 10px 5px 10px;
+                margin: 0px;
                 padding: 10px;
+                align: center;
+                border-radius: 50px;
+                max-width: calc(100% - 20px);
+                height: auto;
             }
 
             .link {
