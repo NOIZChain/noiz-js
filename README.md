@@ -1,5 +1,7 @@
 # NOIZ
 
+This is an internal work-in-progress of the NOIZ advertising platform. For more details, please visit our website [NoizChain.com](https://noizchain.com), or check out our live demo at [chat.noiz.live](https://chat.noiz.live).
+
 ## Project setup
 ```
 yarn install
